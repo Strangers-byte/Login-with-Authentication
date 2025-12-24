@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search for delicious recipes across various categories">
+    <link rel="stylesheet" href="./searchRecipes.css">
+    <title>Search Recipes - Wisk & Wander</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div id="header-container">
+            <script>
+            // Load header
+            fetch("./header.html")
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-container').innerHTML = html;
+                })
+                .catch(err => {
+                    console.error('Failed to load header:', err);
+                });
+            </script>
+        </div>
+    </header>
+
+    <main class="search-page">
+        <section class="search-section">
+            <div class="container">
+                <h1 class="search-title">Find Your Perfect Recipe</h1>
+                <div class="search-bar-container">
+                    <form role="search" class="search-form">
+                        <label for="recipe-search" class="visually-hidden">Search recipes</label>
+                        <input type="search" id="recipe-search" name="search" placeholder="Search for recipes..." aria-label="Search through recipes">
+                        <button type="submit" class="search-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            <span class="visually-hidden">Search</span>
+                        </button>
+                    </form>
+                    <div class="search-filters">
+                        <button class="filter-btn" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="meat">Meat</button>
+                        <button class="filter-btn" data-filter="vegetarian">Vegetarian</button>
+                        <button class="filter-btn" data-filter="sweets">Sweets</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <div class="container">
+                <h2 class="section-title">Search Results</h2>
+                <div class="recipes-grid">
+                    <article class="recipe-card" data-category="meat">
+                        <a href="./recipe.html?recipe=crispy-chicken-burger" class="recipe-link">
+                            <div class="recipe-image-container">
+                                <img src="../Images/searchRecipe/Burger.jpg" alt="Crispy Chicken Burger with lettuce and sauce" loading="lazy">
+                                <span class="recipe-category">Meat</span>
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Crispy Chicken Burger</h3>
+                                <div class="recipe-meta">
+                                    <div class="rating" aria-label="Rating: 5 out of 5 stars">
+                                        ★★★★★
+                                    </div>
+                                    <span class="time">25 mins</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="recipe-card" data-category="vegetarian">
+                        <a href="./recipe.html?recipe=organic-fruit-salad" class="recipe-link">
+                            <div class="recipe-image-container">
+                                <img src="../Images/SearchRecipe/fruits.jpg" alt="Colorful organic fruit salad in a bowl" loading="lazy">
+                                <span class="recipe-category">Vegetarian</span>
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Organic Fruit Salad</h3>
+                                <div class="recipe-meta">
+                                    <div class="rating" aria-label="Rating: 4 out of 5 stars">
+                                        ★★★★☆
+                                    </div>
+                                    <span class="time">15 mins</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="recipe-card" data-category="meat">
+                        <a href="./recipe.html?recipe=pepperoni-pizza" class="recipe-link">
+                            <div class="recipe-image-container">
+                                <img src="../Images/searchRecipe/Pizza.jpg" alt="Pepperoni pizza with melted cheese" loading="lazy">
+                                <span class="recipe-category">Meat</span>
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Pepperoni Pizza</h3>
+                                <div class="recipe-meta">
+                                    <div class="rating" aria-label="Rating: 5 out of 5 stars">
+                                        ★★★★★
+                                    </div>
+                                    <span class="time">30 mins</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="recipe-card" data-category="meat">
+                        <a href="./recipe.html?recipe=steak-with-garlic-butter" class="recipe-link">
+                            <div class="recipe-image-container">
+                                <img src="../Images/searchRecipe/Steak.jpg" alt="Juicy steak with garlic butter" loading="lazy">
+                                <span class="recipe-category">Meat</span>
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Steak with Garlic Butter</h3>
+                                <div class="recipe-meta">
+                                    <div class="rating" aria-label="Rating: 4 out of 5 stars">
+                                        ★★★★☆
+                                    </div>
+                                    <span class="time">20 mins</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="recipe-card" data-category="vegetarian">
+                        <a href="./recipe.html?recipe=creamy-mushroom-pasta" class="recipe-link">
+                            <div class="recipe-image-container">
+                                <img src="../Images/searchRecipe/Pasta.jpg" alt="Creamy mushroom pasta in a white bowl" loading="lazy">
+                                <span class="recipe-category">Vegetarian</span>
+                            </div>
+                            <div class="recipe-content">
+                                <h3>Creamy Mushroom Pasta</h3>
+                                <div class="recipe-meta">
+                                    <div class="rating" aria-label="Rating: 4.5 out of 5 stars">
+                                        ★★★★☆
+                                    </div>
+                                    <span class="time">35 mins</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                
+                <div class="pagination">
+                    <button class="pagination-btn" disabled>Previous</button>
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">Next</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer" id="main-footer">
+        <script>
+            fetch('./footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('main-footer').innerHTML = data;
+                });
+        </script>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get URL parameters
+            const params = new URLSearchParams(window.location.search);
+            const searchTerm = params.get("search");
+            const category = params.get("category") || "all";
+            
+            // Get DOM elements
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            const recipeCards = document.querySelectorAll(".recipe-card");
+            const searchForm = document.querySelector(".search-form");
+            const searchInput = document.getElementById("recipe-search");
+            
+            // Set active filter button
+            filterButtons.forEach(btn => {
+                btn.classList.remove("active");
+                if (btn.getAttribute("data-filter") === category) {
+                    btn.classList.add("active");
+                }
+            });
+
+            // Set search input value if there was a search
+            if (searchTerm) {
+                searchInput.value = searchTerm;
+            }
+            
+            // Filter recipes based on search and category
+            filterRecipes();
+            
+            function filterRecipes() {
+                const activeFilter = document.querySelector(".filter-btn.active")?.getAttribute("data-filter") || "all";
+                const currentSearch = searchInput?.value.trim().toLowerCase() || '';
+                let hasVisibleRecipes = false;
+                
+                if (recipeCards) {
+                    recipeCards.forEach(card => {
+                        const recipeCategory = card.getAttribute("data-category");
+                        const recipeTitle = card.querySelector("h3").textContent.toLowerCase();
+                        
+                        // Check if matches both filter and search
+                        const matchesFilter = activeFilter === "all" || recipeCategory === activeFilter;
+                        const matchesSearch = !currentSearch || recipeTitle.includes(currentSearch);
+                        
+                        const shouldShow = matchesFilter && matchesSearch;
+                        card.style.display = shouldShow ? "block" : "none";
+                        
+                        if (shouldShow) {
+                            hasVisibleRecipes = true;
+                        }
+                    });
+
+                    // Show/hide "no results" message
+                    const noResultsMsg = document.querySelector('.no-results');
+                    
+                    if (!hasVisibleRecipes && document.querySelector('.recipes-grid')) {
+                        if (!noResultsMsg) {
+                            const msg = document.createElement('div');
+                            msg.className = 'no-results';
+                            msg.textContent = 'No recipes found matching your search.';
+                            document.querySelector('.recipes-grid').appendChild(msg);
+                        }
+                    } else if (noResultsMsg) {
+                        noResultsMsg.remove();
+                    }
+                }
+            }
+
+            // Add event listeners for filter buttons
+            if (filterButtons) {
+                filterButtons.forEach(btn => {
+                    btn.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        document.querySelector(".filter-btn.active")?.classList.remove("active");
+                        btn.classList.add("active");
+                        
+                        // Update URL with new parameters
+                        updateUrlAndFilter();
+                    });
+                });
+            }
+
+            // Add event listener for search form
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    updateUrlAndFilter();
+                });
+            }
+
+            // Add live search as user types (optional)
+            if (searchInput && document.querySelector('.recipes-grid')) {
+                searchInput.addEventListener('input', function() {
+                    filterRecipes();
+                });
+            }
+
+            function updateUrlAndFilter() {
+                const searchValue = searchInput?.value.trim() || '';
+                const activeFilter = document.querySelector(".filter-btn.active")?.getAttribute("data-filter") || "all";
+                
+                if (window.location.pathname.includes('searchRecipe')) {
+                    // On search page - update URL without reloading
+                    const url = new URL(window.location);
+                    if (searchValue) {
+                        url.searchParams.set('search', searchValue);
+                    } else {
+                        url.searchParams.delete('search');
+                    }
+                    url.searchParams.set('category', activeFilter);
+                    window.history.pushState({}, '', url);
+                    
+                    filterRecipes();
+                } else {
+                    // On index page - navigate to search page with parameters
+                    if (searchValue) {
+                        window.location.href = `searchRecipe.html?search=${encodeURIComponent(searchValue)}&category=${activeFilter}`;
+                    } else {
+                        window.location.href = `searchRecipe.html?category=${activeFilter}`;
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

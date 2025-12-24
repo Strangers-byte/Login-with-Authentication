@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Whisk & Wondeer</title>
+  <link rel="stylesheet" href="./index-styles.css" />
+</head>
+<body>
+  <header>
+    <div id="header-container">
+      <script>
+      // Load header
+      fetch("./header.html")
+          .then(response => response.text())
+          .then(html => {
+              document.getElementById('header-container').innerHTML = html;
+          })
+          .catch(err => {
+              console.error('Failed to load header:', err);
+          });
+      </script>
+    </div>
+
+    <div class="header-top">
+      <h1>Welcome to Whisk & Wander</h1>
+      <p>Bringing flavors to life, one recipe at a time — because every meal tells a story.</p>
+      <div class="search-bar-container">
+    <form role="search" class="search-form" id="search-form">
+        <label for="recipe-search" class="visually-hidden">Search recipes</label>
+        <input type="search" id="recipe-search" name="search" placeholder="Search for recipes..." aria-label="Search through recipes">
+        <button type="submit" class="search-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span class="visually-hidden">Search</span>
+        </button>
+    </form>
+    <div class="search-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="meat">Meat</button>
+        <button class="filter-btn" data-filter="vegetarian">Vegetarian</button>
+        <button class="filter-btn" data-filter="sweets">Sweets</button>
+    </div>
+</div>
+      <script>
+        function navigateToSearch(category) {
+            // Update the URL to include the category parameter
+            window.location.href = `searchRecipe.html?category=${category}`;
+        }
+
+        // Optional: If you want to maintain the current filtering on the index page
+        document.addEventListener("DOMContentLoaded", function() {
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            const recipeCards = document.querySelectorAll(".recipe-card");
+            
+            // Only run this on the search page, not index
+            if (window.location.pathname.includes('searchRecipe')) {
+                const params = new URLSearchParams(window.location.search);
+                const category = params.get("category") || "all";
+                
+                filterButtons.forEach(btn => {
+                    btn.classList.remove("active");
+                    if (btn.dataset.filter === category) {
+                        btn.classList.add("active");
+                    }
+                });
+                
+                recipeCards.forEach(card => {
+                    card.style.display = (category === "all" || card.dataset.category === category) 
+                        ? "block" 
+                        : "none";
+                });
+            }
+        });
+      </script>
+    </div>
+  </header>
+
+  <section class="categories">
+      <div class="cat-card">
+          <a href="searchRecipe.html" data-filter="meat" aria-label="View meat recipes" class="category-link">
+              <img src="https://cdn.pixabay.com/photo/2019/07/25/01/23/beef-4361462_1280.jpg" alt="Meat Lovers">
+          </a>
+          <p>Meat Lovers' Paradise!</p>
+      </div>
+      <div class="cat-card">
+          <a href="searchRecipe.html" data-filter="sweets" aria-label="View dessert recipes" class="category-link">
+              <img src="https://plus.unsplash.com/premium_photo-1716584036745-5f5049e3e822?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dessert">
+          </a>
+          <p>Life is short, make it sweet!</p>
+      </div>
+      <div class="cat-card">
+          <a href="searchRecipe.html" data-filter="vegetarian" aria-label="View vegetarian recipes" class="category-link">
+              <img src="https://plus.unsplash.com/premium_photo-1713087472522-9ebe85e736bf?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Healthy Food"> 
+          </a>
+          <p>Eat Green, Feel Clean!</p>
+      </div>
+  </section>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          // Handle category card clicks
+          document.querySelectorAll('.category-link').forEach(link => {
+              link.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  const filter = this.getAttribute('data-filter');
+                  window.location.href = `searchRecipe.html?category=${filter}`;
+              });
+          });
+      });
+  </script>
+
+  <section class="features-section">
+    <img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Fruits" />
+    <div class="features-list">
+      <div><strong>Extensive Recipe Collection</strong><br/>Access a diverse range of cooking recipes from around the world</div>
+      <div><strong>Save Favorites</strong><br/>Save your favorite recipes for easy access</div>
+      <div><strong>Explore New Recipes</strong><br/>Discover a wide variety of recipes to try out</div>
+    </div>
+  </section>
+
+  <section class="banner">
+    <div>
+      <h2>Ready to start cooking delicious meals?</h2>
+      <p>Browse our collection of recipes and get inspired to create amazing dishes in your own kitchen.</p>
+    </div>
+    <a href="./searchRecipe.html"><button>Explore Recipes</button></a>
+  </section>
+
+  <div class="container">
+    <section class="intro">
+      <div class="intro-text">
+        <h2>Wide Range of Recipes</h2>
+        <p>Explore a diverse collection of recipes from around the world.</p>
+        <h2>Step-by-Step Instructions</h2>
+        <p>Detailed instructions to guide you through each recipe with ease.</p>
+        <h2>Save Your Favorites</h2>
+        <p>Bookmark your favorite recipes to easily access them later.</p>
+      </div>
+      <div class="intro-image">
+        <img src="https://cdn.pixabay.com/photo/2021/07/06/11/52/muesli-6391402_1280.jpg" alt=" Image" />
+      </div>
+    </section>
+
+    <section class="discover">
+      <div class="discover-text">
+        <h2>Discover the Power of Our Products</h2>
+        <p>Make cooking easier and more delicious with our products! Cook with confidence and bring your favorite recipes to life—the simple way.</p>
+        <button class="main-button" href="./searchRecipe.html">Recipes</button>
+      </div>
+      <div class="steps">
+        <div class="step step-1">
+          <div>
+            <h3>Gather Ingredients</h3>
+            <p>Collect all the necessary ingredients for the recipe.</p>
+          </div>
+          <span>01</span>
+        </div>
+        <div class="step step-2">
+          <div>
+            <h3>Prepare Ingredients</h3>
+            <p>Wash, chop, and measure out all the ingredients as needed.</p>
+          </div>
+          <span>02</span>
+        </div>
+        <div class="step step-3">
+          <div>
+            <h3>Cooking Instructions</h3>
+            <p>Follow the step-by-step cooking instructions to prepare the dish.</p>
+          </div>
+          <span>03</span>
+        </div>
+        <div class="step step-4">
+          <div>
+            <h3>Serve and Enjoy</h3>
+            <p>Plate the dish beautifully and savor the delicious meal you’ve prepared.</p>
+          </div>
+          <span>04</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <h2>Testimonials</h2>
+      <div class="testimonial-list">
+        <div class="testimonial">
+          <strong>John Smith</strong><br />Food Blogger<br />
+          <p>5 stars</p>
+        </div>
+        <div class="testimonial">
+          <strong>Emily Johnson</strong><br />Home Cook<br />
+          <p>I love the variety of recipes available on this site...</p>
+        </div>
+        <div class="testimonial">
+          <strong>David Lee</strong><br />Chef<br />
+          <p>The tips and tricks shared here helped me a lot.</p>
+        </div>
+        <div class="testimonial">
+          <strong>Sarah Miller</strong><br />Food Enthusiast<br />
+          <p>The creativity and organization improved my skills.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-us" id="contact-us">
+      <h2>Contact Us</h2>
+      <div class="contact-boxes">
+        <div class="contact-box">
+          <img src="https://cdn.pixabay.com/photo/2016/04/21/22/50/pizza-1344720_1280.jpg" alt="Feedback" />
+          <p><strong>Feedback:</strong><br />
+            <a href="../html/Feedback.html">Give us your feedback about our website</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer class="main-footer" id="main-footer">
+    <script>
+        fetch("./footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('main-footer').innerHTML = data;
+            });
+      </script>
+  </footer>
+  <script>
+    // Handle search form submission
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const searchTerm = document.getElementById('recipe-search').value.trim();
+        const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+        
+        // Navigate to search page with parameters
+        navigateToSearch(activeFilter, searchTerm);
+    });
+
+    // Filter button click handler
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('.filter-btn.active').classList.remove('active');
+            this.classList.add('active');
+            
+            // Get current search term
+            const searchTerm = document.getElementById('recipe-search').value.trim();
+            const activeFilter = this.getAttribute('data-filter');
+            
+            // Navigate to search page with parameters
+            navigateToSearch(activeFilter, searchTerm);
+        });
+    });
+
+    // Function to navigate to search page with parameters
+    function navigateToSearch(category, searchTerm = '') {
+        let url = `searchRecipe.html?category=${category}`;
+        if (searchTerm) {
+            url += `&search=${encodeURIComponent(searchTerm)}`;
+        }
+        window.location.href = url;
+    }
+  </script>
+</body>
+</html>

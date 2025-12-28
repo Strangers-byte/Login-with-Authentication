@@ -25,8 +25,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:8000",  # FastAPI itself
         "http://127.0.0.1:8000",  # Alternative localhost
-        "http://localhost:3000"    # If using separate frontend dev server
-    ],
+        ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
@@ -34,7 +33,7 @@ app.add_middleware(
 
 router = APIRouter()
 
-templates = Jinja2Templates(directory="templates")
+# templates = Jinja2Templates(directory="templates")
 
 
 
@@ -337,38 +336,38 @@ app.include_router(router, prefix="/api")
 async def health_check():
     return {"message": "Authentication API is running"}
 
-# Serve JS files specifically
-@app.get("/js/{filename}")
-async def serve_js(filename: str):
-    js_path = frontend_path / "js" / filename
-    if js_path.exists() and js_path.is_file():
-        return FileResponse(js_path)
-    raise HTTPException(status_code=404, detail="JS file not found")
+# # Serve JS files specifically
+# @app.get("/js/{filename}")
+# async def serve_js(filename: str):
+#     js_path = frontend_path / "js" / filename
+#     if js_path.exists() and js_path.is_file():
+#         return FileResponse(js_path)
+#     raise HTTPException(status_code=404, detail="JS file not found")
 
-# 3. Static files under /web
-frontend_path = Path(__file__).parent.parent / "frontend"  
-print("HTML files path:", frontend_path.absolute())
-print("Index.html exists:", (frontend_path / "index.html").exists())
+# # 3. Static files under /web
+# frontend_path = Path(__file__).parent.parent / "frontend"  
+# print("HTML files path:", frontend_path.absolute())
+# print("Index.html exists:", (frontend_path / "index.html").exists())
 
-app.mount("/web", StaticFiles(directory=str(frontend_path), html=True), name="frontend")
+# app.mount("/web", StaticFiles(directory=str(frontend_path), html=True), name="frontend")
 
-# 4. Root redirects to web interface
-@app.get("/")
-async def root():
-    return RedirectResponse(url="/web/index.html")
+# # 4. Root redirects to web interface
+# @app.get("/")
+# async def root():
+#     return RedirectResponse(url="/web/index.html")
 
-# 5. Catch-all for SPA routing under /web
-@app.get("/web/{path:path}")
-async def serve_spa(path: str):
-    file_path = frontend_path / path
-    if file_path.exists() and file_path.is_file():
-        return FileResponse(file_path)
-    return FileResponse(frontend_path / "index.html")
+# # 5. Catch-all for SPA routing under /web
+# @app.get("/web/{path:path}")
+# async def serve_spa(path: str):
+#     file_path = frontend_path / path
+#     if file_path.exists() and file_path.is_file():
+#         return FileResponse(file_path)
+#     return FileResponse(frontend_path / "index.html")
 
-# Debug: Print all registered routes
-@app.on_event("startup")
-async def startup_event():
-    print("Registered routes:")
-    for route in app.routes:
-        if hasattr(route, "methods"):
-            print(f"{list(route.methods)} {route.path}")
+# # Debug: Print all registered routes
+# @app.on_event("startup")
+# async def startup_event():
+#     print("Registered routes:")
+#     for route in app.routes:
+#         if hasattr(route, "methods"):
+#             print(f"{list(route.methods)} {route.path}")
